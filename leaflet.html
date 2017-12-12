@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>map test</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
+    <style>
+#mapid { height: 400px; }
+    </style>
+
+
+  </head>
+  <body>
+  
+	hello, world
+	<div id="mapid"></div>
+	<script>
+		var mymap = L.map('mapid').setView([45.514673, -122.653343], 13)
+		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+			maxZoom: 18,
+			id: 'mapbox.satellite',
+			accessToken: 'pk.eyJ1Ijoia2l0Y2hlbndvcmRzIiwiYSI6ImNqOTFyNjR4aDNiNmsycXFxMzkwaXlnNTMifQ.N2K9v0ySoGqgxPCMuLhQaA',
+		}).addTo(mymap);
+		var marker = L.marker([45.512192, -122.653643]).addTo(mymap);
+		var circle = L.circle([45.516139, -122.662387], {
+			color: 'red',
+			fillColor: '#f03',
+			fillOpacity: 0.5,
+			radius: 500
+		}).addTo(mymap);
+		var polygon = L.polygon([
+			[45.533927, -122.693437],
+			[45.553409, -122.654614],
+			[45.558583, -122.695537]
+		]).addTo(mymap);
+		marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+		circle.bindPopup("I am a circle.");
+		polygon.bindPopup("I am a polygon.");
+
+		var popup = L.popup()
+			.setLatLng([45.507361, -122.687726])
+			.setContent("I am a standalone popup.")
+			.openOn(mymap);
+
+		pup = L.popup();
+
+		function onMapClick(e) {
+			popup
+				.setLatLng(e.latlng)
+				.setContent("You clicked the map at " + e.latlng.toString())
+				.openOn(mymap);
+		}
+
+		mymap.on('click', onMapClick);
+
+
+
+
+	</script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>map test</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
+        <script src="https://unpkg.com/esri-leaflet@2.1.1/dist/esri-leaflet.js" integrity="sha512-ECQqaYZke9cSdqlFG08zSkudgrdF6I1d8ViSa7I3VIszJyVqw4ng1G8sehEXlumdMnFYfzY0tMgdQa4WCs9IUw==" crossorigin=""></script>
+	<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
+
+
+    <style>
+#mapid { height: 800px; }
+    </style>
+
+
+  </head>
+  <body>
+  
+	hello, world
+	<div id="mapid"></div>
+	<script>
+		var mymap = L.map('mapid') //.setView([45.514673, -122.653343], 13)
+
+		L.esri.basemapLayer("Topographic").addTo(mymap);
+
+
+		// http://devblog.kitchen.io/wp-content/uploads/2017/10/Morning_Walk.gpx
+		var layer = omnivore.gpx('http://devblog.kitchen.io/wp-content/uploads/2017/06/Tokai_Nature_Trail_day_2.gpx')
+			.on('ready', function() {
+				mymap.fitBounds(layer.getBounds());
+			})
+			.addTo(mymap);
+
+
+
+
+
+	</script>
+  </body>
+</html>
